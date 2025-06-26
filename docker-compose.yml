@@ -1,4 +1,4 @@
-# In: /your-server-projects/dbt/docker-compose.yml
+# In: ~/dbt/docker-compose.yml
 
 version: '3.8'
 
@@ -10,9 +10,10 @@ services:
       - .env
       
     volumes:
-      # This is now a simple, optional variable substitution
-      - ${DBT_PROJECT_PATH}:/usr/app/dbt
-      - ${DBT_PROJECT_PATH}/profiles:/root/.dbt/
+      # Use the variable if provided, otherwise default to '~/dtc_dbt'.
+      # This works for ALL docker compose commands.
+      - ${DBT_PROJECT_PATH:-~/dtc_dbt}:/usr/app/dbt
+      - ${DBT_PROJECT_PATH:-~/dtc_dbt}/profiles:/root/.dbt/
       
     working_dir: /usr/app/dbt
     
