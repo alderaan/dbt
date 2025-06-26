@@ -1,7 +1,4 @@
 # In: ~/dbt/docker-compose.yml
-
-version: '3.8'
-
 services:
   dbt:
     image: ghcr.io/dbt-labs/dbt-postgres:1.8.latest
