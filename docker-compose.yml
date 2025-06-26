@@ -5,15 +5,14 @@ version: '3.8'
 services:
   dbt:
     image: ghcr.io/dbt-labs/dbt-postgres:1.8.latest
-    container_name: dbt_service
     
     env_file:
       - .env
       
     volumes:
-      # FIXED: Added the ':/usr/app/dbt' mount target
-      - ${DBT_PROJECT_PATH:?ERROR: You must provide a path to a dbt project.}:/usr/app/dbt
-      - ${DBT_PROJECT_PATH:?}/profiles:/root/.dbt/
+      # This is now a simple, optional variable substitution
+      - ${DBT_PROJECT_PATH}:/usr/app/dbt
+      - ${DBT_PROJECT_PATH}/profiles:/root/.dbt/
       
     working_dir: /usr/app/dbt
     
