@@ -5,26 +5,18 @@ version: '3.8'
 services:
   dbt:
     image: ghcr.io/dbt-labs/dbt-postgres:1.8.latest
-    container_name: dbt_service
-    restart: unless-stopped
+    container_name: dbt_service # The container will be named dbt-dbt_service-1, etc.
     
     env_file:
       - .env
       
-    # The volumes now require the DBT_PROJECT_PATH variable to be set
     volumes:
-      - ${DBT_PROJECT_PATH:?ERROR: You must provide a path to a dbt project. See documentation.}
+      - ${DBT_PROJECT_PATH:?ERROR: You must provide a path to a dbt project.}
       - ${DBT_PROJECT_PATH:?}/profiles:/root/.dbt/
       
     working_dir: /usr/app/dbt
     
-    command: ["rpc", "--host", "0.0.0.0", "--port", "8580"]
-    
-    ports:
-      - "8580:8580"
-      
-    networks:
-      - supabase_network
+    # NO 'command' or 'ports' needed for `docker compose run`
 
 networks:
   supabase_network:
