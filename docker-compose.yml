@@ -9,8 +9,8 @@ services:
     volumes:
       # Use the variable if provided, otherwise default to '~/dtc_dbt'.
       # This works for ALL docker compose commands.
-      - ${DBT_PROJECT_PATH:-~/dtc_dbt}:/usr/app/dbt
-      - ${DBT_PROJECT_PATH:-~/dtc_dbt}/profiles:/root/.dbt/
+      - ${DBT_PROJECT_PATH:-~/dtc_backend/dtc_dbt}:/usr/app/dbt
+      - ${DBT_PROJECT_PATH:-~/dtc_backend/dtc_dbt}/profiles:/root/.dbt/
       
     working_dir: /usr/app/dbt
     
